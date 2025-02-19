@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzanada Discount</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background-color: #4e1e2d;
+            color: white;
+            padding: 20px;
+        }
+        .popup {
+            background: gold;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 20%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .button {
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .countdown {
+            font-size: 18px;
+            margin-top: 10px;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup">
+        <h2>🎉 You won a discount for our Pizzanada! 🎉</h2>
+        <p>Use code: <strong>PIZZA10</strong> for 10% off.</p>
+        <p class="countdown">Offer expires in <span id="timer">10:00</span></p>
+        <button class="button" onclick="window.location.href='https://yourwebsite.com'">Claim Now</button>
+    </div>
+
+    <script>
+        // Confetti Animation
+        function launchConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+        launchConfetti();
+
+        // Countdown Timer (10 minutes)
+        let timeLeft = 600; 
+        const timerElement = document.getElementById("timer");
+
+        function updateTimer() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            timeLeft--;
+
+            if (timeLeft >= 0) {
+                setTimeout(updateTimer, 1000);
+            } else {
+                timerElement.textContent = "Expired!";
+            }
+        }
+        updateTimer();
+    </script>
+</body>
+</html>
